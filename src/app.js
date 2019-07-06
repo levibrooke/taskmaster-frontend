@@ -23,14 +23,21 @@ function App() {
   useEffect(getTasks, []);
 
   return (
-    <ul>
-      {tasks.map(task => (
-        <Task 
-          data={task}
-          key={task.id}
-        />
-      ))}
-    </ul>
+    <Fragment>
+      <header>
+        <h1>TaskMaster</h1>
+      </header>
+      <main>
+        <ul>
+          {tasks.map(task => (
+            <Task 
+              data={task}
+              key={task.id}
+            />
+          ))}
+        </ul>
+      </main>
+    </Fragment>
   )
 }
 
