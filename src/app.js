@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect, Fragment } from 'react';
+import Task from './task.js';
 import './app.scss';
 
 function App() {
+  const api = `http://taskmaster-env-3.dyim4ppu6d.us-west-2.elasticbeanstalk.com/api`;
+  const [tasks, setTasks] = useState([]);
+
+  const getTasks = () => {
+
+    fetch(`${api}/tasks`, {
+      mode: 'cors',
+      method: 'GET'
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('data', data);
+        setTasks(data);
+      })
+      .catch(err => console.error(err));
+  }
+
+  useEffect(getTasks, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ul>
+      {tasks.map(task => (
+        <Task 
+          data={task}
+          key={task.id}
+        />
+      ))}
+    </ul>
+  )
 }
 
 export default App;
