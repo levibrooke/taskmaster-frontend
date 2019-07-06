@@ -14,7 +14,6 @@ function App() {
     })
       .then(response => response.json())
       .then(data => {
-        console.log('data', data);
         setTasks(data);
       })
       .catch(err => console.error(err));
