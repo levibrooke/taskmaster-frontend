@@ -13,7 +13,10 @@ const Task = (props) => (
       null
     }
     {props.data.pic ?
-      <a href={props.data.pic}>{props.data.pic}</a> :
+      (<div>
+        <a href={props.data.pic}>Fullsize image</a>
+        <a href={props.data.resizedPic}>Resized image</a>
+      </div>) :
       <TaskImageUpload
         api={api}
         id={props.data.id}
